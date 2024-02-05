@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
+import "../styles/form.css"
 
 const Comprimido = ({ setControle }) => {
 
@@ -257,9 +257,6 @@ const Comprimido = ({ setControle }) => {
           Novo
         </button>
       </form>
-      <div>
-        <Link to="/">Menu</Link>
-      </div>
       <div>
         <button type="button" onClick={handleMenu}>
           Menu

@@ -1,0 +1,105 @@
+.comprimidos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .comprimidos h1 {
+    font-size: 36px;
+    margin-bottom: 50px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .input-group input,
+  .input-group select {
+    height: 40px;
+    font-size: 18px;
+    padding: 0 10px;
+  }
+  
+  .input-group select {
+    appearance: menulist;
+    cursor: pointer;
+  }
+  
+  .input-group button {
+    height: 40px;
+    font-size: 18px;
+    margin: 20px 0;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .input-group button:hover {
+    background-color: #3e8e41;
+  }
+  
+  .input-group button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px #00000029;
+    transform: translateY(2px);
+  }
+  
+  .input-group button:focus {
+    outline: none;
+  }
+  
+  .results {
+    margin-top: 50px;
+  }
+  
+  .results h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .results p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  /* Change font family and size for the whole document */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+  }
+  
+  /* Style the buttons */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0069d9;
+  }
+  
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 5px 0 #0069d9;
+  }
+  
+  button:disabled {
+    background-color: #c0c0c0;
+    color: #666;
+    cursor: not-allowed;
+  }
