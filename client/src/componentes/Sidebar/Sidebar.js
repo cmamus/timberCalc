@@ -14,15 +14,39 @@ const Nav = styled.div`
 
 const NavIcon = styled(Link)`
     margin-left: 2rem;
+    font-size: 2rem;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 `;
+
+const SidebarNav = styled.nav`
+    background: #15171c;
+    width: 250px;
+    heigth: 100vh;
+`;
+
+const SidebarWrap = styled.div`
+    width: 100%;
+`; 
 
 const Sidebar = () => {
   return (
+    <>
     <Nav>
       <NavIcon to="#">
         <FaIcons.FaBars />
       </NavIcon>
     </Nav>
+    <SidebarNav>
+      <SidebarWrap>
+      <NavIcon to="#">
+        <AiIcons.AiOutlineClose />
+      </NavIcon>
+      </SidebarWrap>
+    </SidebarNav>
+    </>
   );
 };
 
