@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Comprimidos from "./ElementosComprimidos";
 
 import "../styles/mainMenu.css"
+import Sidebar from "./Sidebar/Sidebar";
 
 function MainMenu() {
   const [controle, setControle] = useState(0);
@@ -11,6 +12,8 @@ function MainMenu() {
   }
 
   return(
+    <>
+    <Sidebar />
     <div className="main-menu-container">
       {controle === 0 && (
         <div>
@@ -31,6 +34,7 @@ function MainMenu() {
         </div>
       )}
     </div>
+    </>
   );
 }
 
