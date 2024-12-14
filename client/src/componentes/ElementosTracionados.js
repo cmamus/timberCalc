@@ -3,21 +3,20 @@ import axios from 'axios';
 
 import "../styles/form.css"
 
-const Comprimidos = ({ setControle }) => {
+const Tracionados = ({ setControle }) => {
 
   const [normal, setNormal] = useState('');
   const [mx, setMx] = useState('');
   const [my, setMy] = useState('');
   const [base, setBase] = useState('');
   const [altura, setAltura] = useState('');
+  const [area_furos, setArea_furos] = useState('');
   const [comprimento, setComprimento] = useState('');
   const [vinculo_x, setVinculo_x] = useState('');
   const [vinculo_y, setVinculo_y] = useState('');
   const [carregamento, setCarregamento] = useState('');
   const [umidade, setUmidade] = useState('');
-  const [beta_c, setBeta_c] = useState('');
-  const [fc0k, setFc0k] = useState('');
-  const [e005, setE005] = useState('');
+  const [ft0k, setFt0k] = useState('');
   const [fmk, setFmk] = useState('');
   const [results, setResults] = useState({});
 
@@ -41,6 +40,10 @@ const Comprimidos = ({ setControle }) => {
     setAltura(e.target.value);
   };
 
+  const handleArea_furosChange = (e) => {
+    setArea_furos(e.target.value);
+  };
+
   const handleComprimentoChange = (e) => {
     setComprimento(e.target.value);
   };
@@ -61,16 +64,8 @@ const Comprimidos = ({ setControle }) => {
     setUmidade(e.target.value);
   };
 
-  const handleBeta_cChange = (e) => {
-    setBeta_c(e.target.value);
-  };
-
-  const handleFc0kChange = (e) => {
-    setFc0k(e.target.value);
-  };
-
-  const handleE005Change = (e) => {
-    setE005(e.target.value);
+  const handleFt0kChange = (e) => {
+    setFt0k(e.target.value);
   };
 
   const handleFmkChange = (e) => {
@@ -83,14 +78,13 @@ const Comprimidos = ({ setControle }) => {
     setMy('');
     setBase('');
     setAltura('');
+    setArea_furos('');
     setComprimento('');
     setVinculo_x('');
     setVinculo_y('');
     setCarregamento('');
     setUmidade('');
-    setBeta_c('');
-    setFc0k('');
-    setE005('');
+    setFt0k('');
     setFmk('');
     setResults({});
   };
@@ -102,20 +96,19 @@ const Comprimidos = ({ setControle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/comprimidos', {
+      const response = await axios.post('/tracionados', {
         normal,
         mx,
         my,
         base,
         altura,
+        area_furos,
         comprimento,
         vinculo_x,
         vinculo_y,
         carregamento,
         umidade,
-        beta_c,
-        fc0k,
-        e005,
+        ft0k,
         fmk
       });
       setResults(response.data);
@@ -125,9 +118,9 @@ const Comprimidos = ({ setControle }) => {
   };
 
   return (
-    <div className="Comprimidos">
+    <div className="tracionados">
       <div>
-        <h1>Elementos Comprimidos e Flexotracomprimidos</h1>
+        <h1>Elementos Tracionados e Flexotracionados</h1>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="input-group">
@@ -173,6 +166,15 @@ const Comprimidos = ({ setControle }) => {
             placeholder="Altura (mm)"
             value={altura}
             onChange={handleAlturaChange}
+          />
+        </div>
+        <div className="input-group">
+          <label>Area dos Furos </label>
+          <input
+            type="number"
+            placeholder="Area dos Furos (mm²)"
+            value={area_furos}
+            onChange={handleArea_furosChange}
           />
         </div>
         <div className="input-group">
@@ -231,29 +233,12 @@ const Comprimidos = ({ setControle }) => {
           </select>
         </div>
         <div className="input-group">
-          <label htmlFor="options">Fator Beta C: </label>
-          <select id="options" value={beta_c} onChange={handleBeta_cChange}>
-            <option value="">Selecione uma opção</option>
-            <option value="serrada">Madeira Serrada e Peças Roliças</option>
-            <option value="engenheirada">MLC, LVL ou CLT</option>
-          </select>
-        </div>
-        <div className="input-group">
           <label>Resistência Característica Paralela as Fibras </label>
           <input
             type="number"
-            placeholder="fc0k (MPa)"
-            value={fc0k}
-            onChange={handleFc0kChange}
-          />
-        </div>
-        <div className="input-group">
-          <label>Módulo de Elasticidade Paralelo Característico </label>
-          <input
-            type="number"
-            placeholder="E005 (MPa)"
-            value={e005}
-            onChange={handleE005Change}
+            placeholder="ft0k (MPa)"
+            value={ft0k}
+            onChange={handleFt0kChange}
           />
         </div>
         <div className="input-group">
@@ -280,7 +265,7 @@ const Comprimidos = ({ setControle }) => {
       {Object.keys(results).length > 0 && (
         <div>
           <h3>Resultados:</h3>
-          <p>f<inf>c0,d</inf>: {results.fc0d} MPa</p>
+          <p>f<inf>t0,d</inf>: {results.ft0d} MPa</p>
           <p>f<inf>m,d</inf>: {results.fmd} MPa</p>
           <p>A: {results.area} mm<sup>2</sup></p>
           <p>I<inf>x</inf>: {results.inercia_x} mm</p>
@@ -291,8 +276,6 @@ const Comprimidos = ({ setControle }) => {
           <p>i<inf>y</inf>: {results.raio_gira_y} mm<sup>4</sup></p>
           <p>λ<inf>x</inf>: {results.lamb_x}</p>
           <p>λ<inf>y</inf>: {results.lamb_y}</p>
-          <p>λ<inf>rel,x</inf>: {results.lamb_rel_x}</p>
-          <p>λ<inf>rel,y</inf>: {results.lamb_rel_y}</p>
           <p>Atende ao Estado Limide de Serviço: {results.passou_els ? 'Sim' : 'Não'}</p>
           <p>σ<inf>N</inf>: {results.sigma_n} MPa</p>
           <p>σ<inf>Mx</inf>: {results.sigma_mx} MPa</p>
@@ -306,4 +289,4 @@ const Comprimidos = ({ setControle }) => {
   );
 };
 
-export default Comprimidos;
+export default Tracionados;
