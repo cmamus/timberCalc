@@ -4,6 +4,7 @@ import axios from 'axios';
 import "../styles/form.css"
 
 const Tracionados = ({ setControle }) => {
+  
 
   const [normal, setNormal] = useState('');
   const [mx, setMx] = useState('');
@@ -16,8 +17,7 @@ const Tracionados = ({ setControle }) => {
   const [vinculo_y, setVinculo_y] = useState('');
   const [carregamento, setCarregamento] = useState('');
   const [umidade, setUmidade] = useState('');
-  const [ft0k, setFt0k] = useState('');
-  const [fmk, setFmk] = useState('');
+  const [madeira, setMadeira] = useState('');
   const [results, setResults] = useState({});
 
   const handleNormalChange = (e) => {
@@ -64,12 +64,8 @@ const Tracionados = ({ setControle }) => {
     setUmidade(e.target.value);
   };
 
-  const handleFt0kChange = (e) => {
-    setFt0k(e.target.value);
-  };
-
-  const handleFmkChange = (e) => {
-    setFmk(e.target.value);
+  const handleMadeiraChange = (e) => {
+    setMadeira(e.target.value);
   };
 
   const handleReset = () => {
@@ -84,8 +80,7 @@ const Tracionados = ({ setControle }) => {
     setVinculo_y('');
     setCarregamento('');
     setUmidade('');
-    setFt0k('');
-    setFmk('');
+    setMadeira('');
     setResults({});
   };
 
@@ -108,8 +103,7 @@ const Tracionados = ({ setControle }) => {
         vinculo_y,
         carregamento,
         umidade,
-        ft0k,
-        fmk
+        madeira
       });
       setResults(response.data);
     } catch (error) {
@@ -169,7 +163,7 @@ const Tracionados = ({ setControle }) => {
           />
         </div>
         <div className="input-group">
-          <label>Area dos Furos </label>
+          <label>Área dos Furos </label>
           <input
             type="number"
             placeholder="Area dos Furos (mm²)"
@@ -233,22 +227,35 @@ const Tracionados = ({ setControle }) => {
           </select>
         </div>
         <div className="input-group">
-          <label>Resistência Característica Paralela as Fibras </label>
-          <input
-            type="number"
-            placeholder="ft0k (MPa)"
-            value={ft0k}
-            onChange={handleFt0kChange}
-          />
-        </div>
-        <div className="input-group">
-          <label>Resistência Característica à Flexão </label>
-          <input
-            type="number"
-            placeholder="fmk (Mpa)"
-            value={fmk}
-            onChange={handleFmkChange}
-          />
+          <label htmlFor="options">Classe da Madeira </label>
+          <select id="options" value={madeira} onChange={handleMadeiraChange}>
+            <option value="">Selecione uma opção</option>
+            <option value="Nativa D20">Nativa D20</option>
+            <option value="Nativa D30">Nativa D30</option>
+            <option value="Nativa D40">Nativa D40</option>
+            <option value="Nativa D50">Nativa D50</option>
+            <option value="Nativa D60">Nativa D60</option>
+            <option value="Conífera C14">Conífera C14</option>
+            <option value="Conífera C16">Conífera C16</option>
+            <option value="Conífera C18">Conífera C18</option>
+            <option value="Conífera C20">Conífera C20</option>
+            <option value="Conífera C22">Conífera C22</option>
+            <option value="Conífera C24">Conífera C24</option>
+            <option value="Conífera C27">Conífera C27</option>
+            <option value="Conífera C30">Conífera C30</option>
+            <option value="Conífera C35">Conífera C35</option>
+            <option value="Conífera C40">Conífera C40</option>
+            <option value="Conífera C45">Conífera C45</option>
+            <option value="Conífera C50">Conífera C50</option>
+            <option value="Folhosa D18">Folhosa D18</option>
+            <option value="Folhosa D24">Folhosa D24</option>
+            <option value="Folhosa D30">Folhosa D30</option>
+            <option value="Folhosa D35">Folhosa D35</option>
+            <option value="Folhosa D40">Folhosa D40</option>
+            <option value="Folhosa D50">Folhosa D50</option>
+            <option value="Folhosa D60">Folhosa D40</option>
+            <option value="Folhosa D70">Folhosa D50</option>
+          </select>
         </div>
         <button type="submit">
           Calcular
@@ -265,21 +272,22 @@ const Tracionados = ({ setControle }) => {
       {Object.keys(results).length > 0 && (
         <div>
           <h3>Resultados:</h3>
-          <p>f<inf>t0,d</inf>: {results.ft0d} MPa</p>
-          <p>f<inf>m,d</inf>: {results.fmd} MPa</p>
+          <p>Classe da Madeira: {results.madeira}</p>
+          <p>f<sub>t0,d</sub>: {results.ft0d} MPa</p>
+          <p>f<sub>m,d</sub>: {results.fmd} MPa</p>
           <p>A: {results.area} mm<sup>2</sup></p>
-          <p>I<inf>x</inf>: {results.inercia_x} mm</p>
-          <p>I<inf>y</inf>: {results.inercia_y} mm</p>
-          <p>W<inf>x</inf>: {results.mod_res_x} mm<sup>3</sup></p>
-          <p>W<inf>y</inf>: {results.mod_res_y} mm<sup>3</sup></p>
-          <p>i<inf>x</inf>: {results.raio_gira_x} mm<sup>4</sup></p>
-          <p>i<inf>y</inf>: {results.raio_gira_y} mm<sup>4</sup></p>
-          <p>λ<inf>x</inf>: {results.lamb_x}</p>
-          <p>λ<inf>y</inf>: {results.lamb_y}</p>
+          <p>I<sub>x</sub>: {results.inercia_x} mm<sup>4</sup></p>
+          <p>I<sub>y</sub>: {results.inercia_y} mm<sup>4</sup></p>
+          <p>W<sub>x</sub>: {results.mod_res_x} mm<sup>3</sup></p>
+          <p>W<sub>y</sub>: {results.mod_res_y} mm<sup>3</sup></p>
+          <p>i<sub>x</sub>: {results.raio_gira_x} mm</p>
+          <p>i<sub>y</sub>: {results.raio_gira_y} mm</p>
+          <p>λ<sub>x</sub>: {results.lamb_x}</p>
+          <p>λ<sub>y</sub>: {results.lamb_y}</p>
           <p>Atende ao Estado Limide de Serviço: {results.passou_els ? 'Sim' : 'Não'}</p>
-          <p>σ<inf>N</inf>: {results.sigma_n} MPa</p>
-          <p>σ<inf>Mx</inf>: {results.sigma_mx} MPa</p>
-          <p>σ<inf>My</inf>: {results.sigma_my} MPa</p>
+          <p>σ<sub>N</sub>: {results.sigma_n} MPa</p>
+          <p>σ<sub>Mx</sub>: {results.sigma_mx} MPa</p>
+          <p>σ<sub>My</sub>: {results.sigma_my} MPa</p>
           <p>ELU 1º Condição: {results.cond_1}</p>
           <p>ELU 2º Condição: {results.cond_2}</p>
           <p>Atende ao Estado Limite Último: {results.passou_elu ? 'Sim' : 'Não'}</p>

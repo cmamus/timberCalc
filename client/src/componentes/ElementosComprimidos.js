@@ -16,9 +16,7 @@ const Comprimidos = ({ setControle }) => {
   const [carregamento, setCarregamento] = useState('');
   const [umidade, setUmidade] = useState('');
   const [beta_c, setBeta_c] = useState('');
-  const [fc0k, setFc0k] = useState('');
-  const [e005, setE005] = useState('');
-  const [fmk, setFmk] = useState('');
+  const [madeira, setMadeira] = useState('');
   const [results, setResults] = useState({});
 
   const handleNormalChange = (e) => {
@@ -65,16 +63,8 @@ const Comprimidos = ({ setControle }) => {
     setBeta_c(e.target.value);
   };
 
-  const handleFc0kChange = (e) => {
-    setFc0k(e.target.value);
-  };
-
-  const handleE005Change = (e) => {
-    setE005(e.target.value);
-  };
-
-  const handleFmkChange = (e) => {
-    setFmk(e.target.value);
+  const handleMadeiraChange = (e) => {
+    setMadeira(e.target.value);
   };
 
   const handleReset = () => {
@@ -89,9 +79,7 @@ const Comprimidos = ({ setControle }) => {
     setCarregamento('');
     setUmidade('');
     setBeta_c('');
-    setFc0k('');
-    setE005('');
-    setFmk('');
+    setMadeira('');
     setResults({});
   };
 
@@ -114,9 +102,7 @@ const Comprimidos = ({ setControle }) => {
         carregamento,
         umidade,
         beta_c,
-        fc0k,
-        e005,
-        fmk
+        madeira
       });
       setResults(response.data);
     } catch (error) {
@@ -231,40 +217,44 @@ const Comprimidos = ({ setControle }) => {
           </select>
         </div>
         <div className="input-group">
-          <label htmlFor="options">Fator Beta C: </label>
+          <label htmlFor="options">Classe da Madeira </label>
+          <select id="options" value={madeira} onChange={handleMadeiraChange}>
+            <option value="">Selecione uma opção</option>
+            <option value="Nativa D20">Nativa D20</option>
+            <option value="Nativa D30">Nativa D30</option>
+            <option value="Nativa D40">Nativa D40</option>
+            <option value="Nativa D50">Nativa D50</option>
+            <option value="Nativa D60">Nativa D60</option>
+            <option value="Conífera C14">Conífera C14</option>
+            <option value="Conífera C16">Conífera C16</option>
+            <option value="Conífera C18">Conífera C18</option>
+            <option value="Conífera C20">Conífera C20</option>
+            <option value="Conífera C22">Conífera C22</option>
+            <option value="Conífera C24">Conífera C24</option>
+            <option value="Conífera C27">Conífera C27</option>
+            <option value="Conífera C30">Conífera C30</option>
+            <option value="Conífera C35">Conífera C35</option>
+            <option value="Conífera C40">Conífera C40</option>
+            <option value="Conífera C45">Conífera C45</option>
+            <option value="Conífera C50">Conífera C50</option>
+            <option value="Folhosa D18">Folhosa D18</option>
+            <option value="Folhosa D24">Folhosa D24</option>
+            <option value="Folhosa D30">Folhosa D30</option>
+            <option value="Folhosa D35">Folhosa D35</option>
+            <option value="Folhosa D40">Folhosa D40</option>
+            <option value="Folhosa D50">Folhosa D50</option>
+            <option value="Folhosa D60">Folhosa D40</option>
+            <option value="Folhosa D70">Folhosa D50</option>
+          </select>
+        </div>
+        <div className="input-group">
+          <label htmlFor="options">Tipo de Madeira: </label>
           <select id="options" value={beta_c} onChange={handleBeta_cChange}>
             <option value="">Selecione uma opção</option>
             <option value="serrada">Madeira Serrada e Peças Roliças</option>
             <option value="engenheirada">MLC, LVL ou CLT</option>
           </select>
-        </div>
-        <div className="input-group">
-          <label>Resistência Característica Paralela as Fibras </label>
-          <input
-            type="number"
-            placeholder="fc0k (MPa)"
-            value={fc0k}
-            onChange={handleFc0kChange}
-          />
-        </div>
-        <div className="input-group">
-          <label>Módulo de Elasticidade Paralelo Característico </label>
-          <input
-            type="number"
-            placeholder="E005 (MPa)"
-            value={e005}
-            onChange={handleE005Change}
-          />
-        </div>
-        <div className="input-group">
-          <label>Resistência Característica à Flexão </label>
-          <input
-            type="number"
-            placeholder="fmk (Mpa)"
-            value={fmk}
-            onChange={handleFmkChange}
-          />
-        </div>
+        </div>       
         <button type="submit">
           Calcular
         </button>
@@ -280,23 +270,23 @@ const Comprimidos = ({ setControle }) => {
       {Object.keys(results).length > 0 && (
         <div>
           <h3>Resultados:</h3>
-          <p>f<inf>c0,d</inf>: {results.fc0d} MPa</p>
-          <p>f<inf>m,d</inf>: {results.fmd} MPa</p>
+          <p>f<sub>c0,d</sub>: {results.fc0d} MPa</p>
+          <p>f<sub>m,d</sub>: {results.fmd} MPa</p>
           <p>A: {results.area} mm<sup>2</sup></p>
-          <p>I<inf>x</inf>: {results.inercia_x} mm</p>
-          <p>I<inf>y</inf>: {results.inercia_y} mm</p>
-          <p>W<inf>x</inf>: {results.mod_res_x} mm<sup>3</sup></p>
-          <p>W<inf>y</inf>: {results.mod_res_y} mm<sup>3</sup></p>
-          <p>i<inf>x</inf>: {results.raio_gira_x} mm<sup>4</sup></p>
-          <p>i<inf>y</inf>: {results.raio_gira_y} mm<sup>4</sup></p>
-          <p>λ<inf>x</inf>: {results.lamb_x}</p>
-          <p>λ<inf>y</inf>: {results.lamb_y}</p>
-          <p>λ<inf>rel,x</inf>: {results.lamb_rel_x}</p>
-          <p>λ<inf>rel,y</inf>: {results.lamb_rel_y}</p>
+          <p>I<sub>x</sub>: {results.inercia_x} mm<sup>4</sup></p>
+          <p>I<sub>y</sub>: {results.inercia_y} mm<sup>4</sup></p>
+          <p>W<sub>x</sub>: {results.mod_res_x} mm<sup>3</sup></p>
+          <p>W<sub>y</sub>: {results.mod_res_y} mm<sup>3</sup></p>
+          <p>i<sub>x</sub>: {results.raio_gira_x} mm</p>
+          <p>i<sub>y</sub>: {results.raio_gira_y} mm</p>
+          <p>λ<sub>x</sub>: {results.lamb_x}</p>
+          <p>λ<sub>y</sub>: {results.lamb_y}</p>
+          <p>λ<sub>rel,x</sub>: {results.lamb_rel_x}</p>
+          <p>λ<sub>rel,y</sub>: {results.lamb_rel_y}</p>
           <p>Atende ao Estado Limide de Serviço: {results.passou_els ? 'Sim' : 'Não'}</p>
-          <p>σ<inf>N</inf>: {results.sigma_n} MPa</p>
-          <p>σ<inf>Mx</inf>: {results.sigma_mx} MPa</p>
-          <p>σ<inf>My</inf>: {results.sigma_my} MPa</p>
+          <p>σ<sub>N</sub>: {results.sigma_n} MPa</p>
+          <p>σ<sub>Mx</sub>: {results.sigma_mx} MPa</p>
+          <p>σ<sub>My</sub>: {results.sigma_my} MPa</p>
           <p>ELU 1º Condição: {results.cond_1}</p>
           <p>ELU 2º Condição: {results.cond_2}</p>
           <p>Atende ao Estado Limite Último: {results.passou_elu ? 'Sim' : 'Não'}</p>
