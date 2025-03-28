@@ -102,7 +102,7 @@ const Comprimidos = ({ setControle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/comprimidos', {
+      const response = await axios.post('http://localhost:5000/comprimidos', {
         normal,
         mx,
         my,

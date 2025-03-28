@@ -96,7 +96,7 @@ const Tracionados = ({ setControle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/tracionados', {
+      const response = await axios.post('http://localhost:5000/tracionados', {
         normal,
         mx,
         my,
