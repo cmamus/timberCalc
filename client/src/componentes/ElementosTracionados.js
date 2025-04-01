@@ -205,7 +205,7 @@ const Tracionados = ({ setControle }) => {
           </select>
         </div>
         <div className="input-group">
-          <label htmlFor="options">Classe de Carregamento (kmod1): </label>
+          <label htmlFor="options">Classe de Carregamento (k<sub>mod1</sub>): </label>
           <select id="options" value={carregamento} onChange={handleCarregamentoChange}>
             <option value="">Selecione uma opção</option>
             <option value="permanente">Permanete</option>
@@ -216,7 +216,7 @@ const Tracionados = ({ setControle }) => {
           </select>
         </div>
         <div className="input-group">
-          <label htmlFor="options">Classe de Umidade (kmod2): </label>
+          <label htmlFor="options">Classe de Umidade (k<sub>mod2</sub>): </label>
           <select id="options" value={umidade} onChange={handleUmidadeChange}>
             <option value="">Selecione uma opção</option>
             <option value="classe1">Classe 1</option>

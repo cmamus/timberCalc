@@ -1,0 +1,36 @@
+----- DOWNLOADS -----
+VSCode:
+    *** Extensões ***
+    - Python
+    - Pylance
+    - Python Debbuger
+    - Dracula
+
+    *** GitHub ***
+    - Criar conta
+    - Vincular no VSCode:
+        ~ Turn On Cloud Changes
+        ~ Sign in with GitHub
+
+Python 3
+NodeJS
+Git
+
+----- ACESSAR O REPOSITÓRIO -----
+Botão direito na pasta que quer deixar a pasta: "Open GitBash Here"
+Colar o comando: git clone  --single-branch Tracionados_Comprimidos http://github.com/cmamus/timberCalc
+Vai pedir para logar no GitHub
+
+----- DEPOIS DE CLONADO -----
+Abrir a pasta no VSCode
+Abrir o PowerShell como adm e executar o comando: Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
+Splitar o terminal
+Na pasta client: "npm install"
+
+Na pasta flask-server:
+    - python -m venv venv
+    - venv\Scripts\activate
+    - pip install axios
+    - pip install flask
+    - pip install flask_cors
